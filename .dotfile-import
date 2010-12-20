@@ -1,0 +1,11 @@
+#!/bin/sh
+# sh < <( curl https://github.com/holysugar/dotfiles/raw/master/.dotfile-import )
+
+URL=https://github.com/holysugar/dotfiles/raw/master/
+
+for i in .gitignore .gitconfig .screenrc .zshrc: do
+  if [ ! -f ~/$i ]; then
+    curl $URL/$i > ~/$i
+  fi
+done
+
