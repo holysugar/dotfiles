@@ -1,0 +1,15 @@
+[core]
+    excludesfile = ~/.gitignore
+	editor = vim
+[user]
+	name = holysugar
+	email = holysugar@gmail.com
+[alias]
+    co = checkout
+    ci = commit
+    st = status
+    up = pull --rebase
+    di = diff --color
+    dc = diff --cached --color
+[color]
+	ui = true

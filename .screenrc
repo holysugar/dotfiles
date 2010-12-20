@@ -1,0 +1,42 @@
+# screenrc
+
+# see URL,
+# http://zinnia.dyndns.org/~hiki/Screen/
+# ...
+
+
+escape ^z^z
+#escape ^o^o
+#escape ^x^x
+defencoding UTF-8
+defutf8 on
+
+# This is how one can set a reattach password:
+# password ODSJQf.4IJN7E    # "1234"
+
+vbell off
+autodetach on
+startup_message off
+pow_detach_msg "Screen session of \$LOGNAME \$:cr:\$:nl:ended."
+
+defscrollback 15000
+
+bind ^] paste [.]
+bind ^W command -c SPLIT
+bind -c SPLIT s split
+bind -c SPLIT q remove
+bind -c SPLIT c remove
+bind -c SPLIT o only
+bind -c SPLIT w focus
+bind -c SPLIT ^W focus
+
+
+#caption always "%H: %3n %t%? @%u%?%? [%h]%?"
+#caption always "$LOGNAME@%H %{= wb} %-w%{=bu dr}%n %t%{-}%+w %= %{=b wk} [%l] %{=b wb}%y/%m/%d(%D) %{=b wm}%c"
+#caption always "%+0<%?%F%{= wd}%:%{= ww}%? %-w%{=u dr}%50>%n %t%{-}%+w%65<%=%?%F%{b}%?%y/%m/%d(%D) %?%F%{.m}%?%c%?%F%{wd}%?%? [%O`%?"
+#caption always "%+0<%?%F%{= wb}%:%{= wk}%?$LOGNAME@%H %+15<%L=%{= kw} %-w%60L>%{=b kr}%n %t%{-}%+w%75<%= %?%F%{b}%?%{= wb}[%l]%{= wm}%c %{= wb}%y/%m/%d(%D)"
+caption always "%+0<%?%F%{= wb}%:%{= wk}%?$LOGNAME@%H %+15<%L=%{= kw} %-w%60L>%{=b kr}%n %t%{-}%+w%75<%= %?%F%{b}%?%{= wb}[%l]%{= wm}%c %{= wb}%y/%m/%d"
+
+# hardstatus alwaysignore
+#hardstatus alwayslastline "%w"
+
