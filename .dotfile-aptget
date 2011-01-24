@@ -2,7 +2,7 @@
 # sh < <( curl https://github.com/holysugar/dotfiles/raw/master/.dotfile-aptget )
 # this is for intalling essential packages for me in ubuntu
 
-sudo apt-get install \
+sudo apt-get install -y \
   vim \
   screen \
   lv \
@@ -26,12 +26,13 @@ sudo apt-get install \
   zlib1g-dev \
   libssl-dev \
   libxml2-dev \
+  git-core
 ;
   
 if [ -z $RVM ]; then
-  bash < <(curl http://rvm.beginrescueend.com/releases/rvm-install-head)
+  bash < <( curl http://rvm.beginrescueend.com/releases/rvm-install-head )
   source ~/.rvm/scripts/rvm
-end
+fi
 
   
 
