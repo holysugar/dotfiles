@@ -11,5 +11,9 @@
     up = pull --rebase
     di = diff --color
     dc = diff --cached --color
+    topic = checkout origin/master -b 
+    current-branch = describe --all --contains HEAD
+    push-for-review = "!sh -c 'git push origin HEAD:refs/for/master/`git current-branch`'"
+    fetch-for-review = "!sh -c 'git fetch origin $0 && git checkout FETCH_HEAD'"
 [color]
 	ui = true
