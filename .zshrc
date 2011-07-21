@@ -1,18 +1,3 @@
-# .zshrc
-# $id:$
-
-############ commonly setting (between .bashrc / .shrc )
-
-UNAME=`uname`
-
-if [ ${UNAME%%_*} = 'CYGWIN' -a -f /etc/profile ]; then
-  . /etc/profile
-fi
-
-if [ -f $HOME/.shrc_common ]; then
-  . $HOME/.shrc_common
-fi
-
 fpath=(~/lib/zsh $fpath)
 
 ############ options
@@ -197,12 +182,16 @@ bindkey '^x^_'  dabbrev-menu-complete
 alias xulfx="TERM=xterm-color /Applications/Firefox.app/Contents/MacOS/firefox -P xuldev -jsconsole"
 alias gvim="TERM=xterm-color /Applications/MacPorts/Vim/Vim.app/Contents/MacOS/Vim -g"
 
-alias gitsci="git stash; git svn dcommit; git stash apply"
+alias g='git'
+alias gs='git status'
 alias gup="git stash; git pull --rebase origin master; git stash apply"
+
 alias r="rails"
 alias rs="rake spec"
 alias rr="rake routes"
 
-[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
+alias s="screen -U"
+alias sx="screen -U -x"
+
  
 # vim: set sw=2 sts=2 ts=2:
