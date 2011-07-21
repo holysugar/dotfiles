@@ -21,7 +21,7 @@ for dotfile in .git* .screenrc .zsh*; do
 done
 
 # vim
-if [ ! -f ~/.vim ]; then
+if [ ! -e ~/.vim ]; then
   echo installing .vim, .vimrc
   cp -Rp .vim .vimrc ~/
 
