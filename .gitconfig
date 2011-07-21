@@ -1,9 +1,9 @@
 [core]
     excludesfile = ~/.gitignore
-	editor = vim
+    editor = vim
 [user]
-	name = holysugar
-	email = holysugar@gmail.com
+    name = holysugar
+    email = holysugar@gmail.com
 [alias]
     co = checkout
     ci = commit
@@ -16,4 +16,4 @@
     push-for-review = "!sh -c 'git push origin HEAD:refs/for/master/`git current-branch`'"
     fetch-for-review = "!sh -c 'git fetch origin $0 && git checkout FETCH_HEAD'"
 [color]
-	ui = true
+    ui = true
