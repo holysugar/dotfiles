@@ -185,8 +185,9 @@ Bundle "tComment"
 " Navigation
 Bundle "http://github.com/gmarik/vim-visual-star-search.git"
 
-" Compl
-Bundle "AutoComplPop"
+" neocomplcache
+Bundle "neocomplcache"
+let g:neocomplcache_enable_at_startup = 1
 
 filetype plugin indent on
 " " }}}
