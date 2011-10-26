@@ -186,6 +186,8 @@ alias g='git'
 alias gs='git status'
 alias gup="git stash; git pull --rebase origin master; git stash apply"
 
+alias b='bundle'
+
 alias r="rails"
 alias rs="rake spec"
 alias rr="rake routes"

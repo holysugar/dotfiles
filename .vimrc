@@ -14,7 +14,7 @@ set modelines=5 " default numbers of lines to read for modeline instructions
 " Backup
 set writebackup
 set backup
-set directory=/tmp// " prepend(^=) $HOME/.tmp/ to default path; use full path as backup filename(//)
+set directory=/tmp/ " prepend(^=) $HOME/.tmp/ to default path; use full path as backup filename(//)
 set backupdir=~/.vimbackup
 " Buffers
 set hidden " The current buffer can be put to the background without writing to disk
@@ -79,6 +79,9 @@ set title
 
 set wildmenu
 
+set cursorcolumn
+set cursorline
+
 "colorscheme gmarik
 colorscheme desert
 
@@ -88,6 +91,15 @@ hi PmenuSbar ctermbg=4            guibg=#333333
 "highlight Pmenu ctermbg=8 guibg=#606060
 "highlight PmenuSel ctermbg=12 guibg=Orange
 "highlight PmenuSbar ctermbg=0 guibg=White
+
+" highlight trailing whiltespaces
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
 " "}}}
 
 " Command and Auto commands " {{{
@@ -141,6 +153,8 @@ Bundle "http://github.com/gmarik/snipmate.vim.git"
 Bundle "http://github.com/rstacruz/sparkup.git", {'rtp': 'vim/'}
 Bundle "http://github.com/kchmck/vim-coffee-script"
 Bundle "stickykey"
+Bundle "haml.zip"
+Bundle "http://github.com/bbommarito/vim-slim.git"
 
 " Syntax highlight
 Bundle "jQuery"
