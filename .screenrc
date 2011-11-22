@@ -38,5 +38,5 @@ bind -c SPLIT ^W focus
 caption always "%+0<%?%F%{= wb}%:%{= wk}%?$LOGNAME@%H %+15<%L=%{= kw} %-w%60L>%{=b kr}%n %t%{-}%+w%75<%= %?%F%{b}%?%{= wb}[%l]%{= wm}%c %{= wb}%y/%m/%d"
 
 # hardstatus alwaysignore
-#hardstatus alwayslastline "%w"
+hardstatus alwayslastline "%Y-%m-%d %c"
 
