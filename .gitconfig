@@ -1,21 +1,29 @@
 [core]
     excludesfile = ~/.gitignore
-	editor = vim
+    editor = vim
 [user]
-	name = holysugar
-	email = holysugar@gmail.com
+    name = holysugar
+    email = holysugar@gmail.com
 [alias]
     co = checkout
     ci = commit
     st = status
-    up = pull --rebase
+    up = pull --rebase origin master
     di = diff --color
     dc = diff --cached --color
-    topic = checkout origin/master -b 
-    current-branch = describe --all --contains HEAD
-    push-for-review = "!sh -c 'git push origin HEAD:refs/for/master/`git current-branch`'"
-    fetch-for-review = "!sh -c 'git fetch origin $0 && git checkout FETCH_HEAD'"
     kokomade = tag -f 'ここまで読んだ' origin/master
     newspaper = log -p --reverse 'ここまで読んだ'..origin/master
+    tree = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    topic = checkout origin/master -b
+    current-branch = describe --all --contains HEAD
+    push-for-review = "!sh -c 'git push origin HEAD:refs/for/master/`git current-branch`'"
+    ffr = "!sh -c ' \
+      change=$1; \
+      if [ -z \"$change\" ]; then exit 1; fi; \
+      patchset=${2:-1}; \
+      val=`expr $change % 100`; \
+      dir=`printf '%02d' $val` ; \
+      git fetch origin refs/changes/$dir/$change/$patchset && git checkout FETCH_HEAD -b $change-$patchset; \
+    ' __dummy__"
 [color]
-	ui = true
+    ui = true
