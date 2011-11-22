@@ -184,9 +184,11 @@ alias gvim="TERM=xterm-color /Applications/MacPorts/Vim/Vim.app/Contents/MacOS/V
 
 alias g='git'
 alias gs='git status'
+alias t='git status'
 alias gup="git stash; git pull --rebase origin master; git stash apply"
 
 alias b='bundle'
+alias be='bundle exec'
 
 alias r="rails"
 alias rs="rake spec"
@@ -195,5 +197,9 @@ alias rr="rake routes"
 alias s="screen -U"
 alias sx="screen -U -x"
 
- 
+alias w-rails="watchr ~/rails.watchr"
+ffrmig() {
+  git config alias.ffr >/dev/null && git ffr $1 $2 && rake db:create db:migrate
+}
+
 # vim: set sw=2 sts=2 ts=2:
