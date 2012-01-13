@@ -14,9 +14,20 @@
     kokomade = tag -f 'ここまで読んだ' origin/master
     newspaper = log -p --reverse 'ここまで読んだ'..origin/master
     tree = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    # for gerrit without repo
     topic = checkout origin/master -b
     current-branch = describe --all --contains HEAD
     push-for-review = "!sh -c 'git push origin HEAD:refs/for/master/`git current-branch`'"
+    pfr = "!sh -c ' \
+      reviewer=$1; \
+      topic=${2:-`git current-branch`}; \
+      if [ -n \"$reviewer\" ]; then \
+        echo git push origin HEAD:refs/for/master/${topic} --receive-pack=\\\"git receive-pack --reviewer=$reviewer\\\"; \
+      else \
+        echo git push origin HEAD:refs/for/master/${topic} ;\
+      fi; \
+    ' __dummy__"
+
     ffr = "!sh -c ' \
       change=$1; \
       if [ -z \"$change\" ]; then exit 1; fi; \
