@@ -8,10 +8,10 @@ setopt pushd_ignore_dups
 setopt pushd_silent
 
 # Completion
-setopt auto_menu 
+setopt auto_menu
 unsetopt list_beep
 setopt menu_complete
-setopt always_last_prompt 
+setopt always_last_prompt
 setopt auto_name_dirs
 unsetopt cdable_vars
 setopt auto_param_keys
@@ -28,7 +28,7 @@ setopt hist_ignore_space
 setopt share_history
 
 # Input/Output
-setopt correct 
+setopt correct
 setopt print_eight_bit
 setopt sun_keyboard_hack
 #setopt interactive_comments
@@ -42,7 +42,10 @@ unsetopt beep
 
 
 ############ env for zsh
+prompt_vcs='%1(v|%F{green}%1v%f|)'
 export PROMPT="[%n@%m %3d]%(#.#.$) "
+#export PROMPT="[%n@%m %3d${prompt_vcs}]%(#.#.$) "
+RPROMPT=$prompt_vcs
 export HISTFILE=$HOME/.zsh_history
 export SAVEHIST=1000
 export HISTSIZE=8192
@@ -61,6 +64,9 @@ zstyle ':completion:*:default' menu select=1
 
 autoload -U zmv
 
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' formats '(%r)-(%b)-(%S)'
+zstyle ':vcs_info:*' actionformats '(%r)-(%b:%a)-(%S)'
 
 ############ bindkey
 
@@ -89,6 +95,12 @@ bindkey -s 'sv nst' 'svn st'
 
 chpwd () {
   ls -F
+}
+
+precmd () {
+  psvar=()
+  LANG=en_US.UTF-8 vcs_info
+  [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
 
 ## Ctrl-Z
@@ -164,8 +176,9 @@ if [ "$TERM" = "screen" ]; then
 fi
 
 
+
 # dabbrev
-HARDCOPYFILE=/tmp/holy-screen-hardcopy
+HARDCOPYFILE=/tmp/${USERNAME}-screen-hardcopy
 touch $HARDCOPYFILE
 
 dabbrev-complete () {
@@ -186,6 +199,8 @@ alias g='git'
 alias gs='git status'
 alias t='git status'
 alias gup="git stash; git pull --rebase origin master; git stash apply"
+alias a='git add'
+alias d='git diff'
 
 alias b='bundle'
 alias be='bundle exec'
@@ -199,7 +214,7 @@ alias sx="screen -U -x"
 
 alias w-rails="watchr ~/rails.watchr"
 ffrmig() {
-  git config alias.ffr >/dev/null && git ffr $1 $2 && rake db:create db:migrate
+  git config alias.ffr >/dev/null && git ffr $1 $2 && bundle install && rake db:create db:migrate
 }
 
 # vim: set sw=2 sts=2 ts=2:
