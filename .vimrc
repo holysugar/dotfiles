@@ -163,7 +163,7 @@ Bundle "Markdown"
 Bundle "https://github.com/timcharper/textile.vim.git"
 
 " Git integration
-Bundle "git.zip"
+Bundle "https://github.com/tpope/vim-git"
 Bundle "fugitive.vim"
 Bundle "http://github.com/mattn/gist-vim.git"
 
@@ -224,7 +224,7 @@ nnoremap <silent> <S-CR> A<CR><ESC>
 "vnoremap <C-S> <C-C>:update<CR>
 "inoremap <C-S> <C-O>:update<CR>
 
-nnoremap          <LocalLeader>j :!rspec -b %<CR>
+nnoremap          <LocalLeader>j :!bundle exec rspec -X -b %<CR>
 
 " fileencoding
 nnoremap <silent> <LocalLeader>u :set fileencoding=utf-8<CR>
