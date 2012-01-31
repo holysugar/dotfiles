@@ -22,9 +22,9 @@
       reviewer=$1; \
       topic=${2:-`git current-branch`}; \
       if [ -n \"$reviewer\" ]; then \
-        echo git push origin HEAD:refs/for/master/${topic} --receive-pack=\\\"git receive-pack --reviewer=$reviewer\\\"; \
+        git push origin HEAD:refs/for/master/${topic} --receive-pack=\"git receive-pack --reviewer=$reviewer\" ;\
       else \
-        echo git push origin HEAD:refs/for/master/${topic} ;\
+        git push origin HEAD:refs/for/master/${topic} ;\
       fi; \
     ' __dummy__"
 
