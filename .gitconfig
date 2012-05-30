@@ -13,12 +13,11 @@
     dc = diff --cached --color
     kokomade = tag -f 'ここまで読んだ' origin/master
     newspaper = log -p --reverse 'ここまで読んだ'..origin/master
-    tree = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-    # for gerrit without repo
+    tree = log --graph --pretty=format:'%C(yellow)%h%Creset - %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(red)%d%Creset' --abbrev-commit --date=relative
     topic = checkout origin/master -b
     current-branch = describe --all --contains HEAD
     push-for-review = "!sh -c 'git push origin HEAD:refs/for/master/`git current-branch`'"
-    pfr = "!sh -c ' \
+    pfr = "!sh -xc ' \
       reviewer=$1; \
       topic=${2:-`git current-branch`}; \
       if [ -n \"$reviewer\" ]; then \
@@ -36,5 +35,14 @@
       dir=`printf '%02d' $val` ; \
       git fetch origin refs/changes/$dir/$change/$patchset && git checkout FETCH_HEAD -b $change-$patchset; \
     ' __dummy__"
+
+    sync = "!sh -xc ' \
+      origin=${1:-origin}; \
+      upstream=${2:-upstream}; \
+      git fetch $origin && git fetch $upstream && git checkout $upstream/master -b upstream-master && git push $origin upstream-master:master; \
+      git checkout master; \
+      git branch -d upstream-master; \
+    ' __dummy__"
+
 [color]
     ui = true
