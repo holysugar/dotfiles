@@ -1,1 +1,4 @@
 .*.sw?
+Guardfile
+.rspec
+_

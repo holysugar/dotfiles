@@ -11,6 +11,9 @@ escape ^z^z
 defencoding UTF-8
 defutf8 on
 
+term xterm-256color
+termcapinfo xterm-256color 'is=^[r^[mJ^[H^[?7h^[?1;4;6l'
+
 # This is how one can set a reattach password:
 # password ODSJQf.4IJN7E    # "1234"
 
@@ -39,4 +42,3 @@ caption always "%+0<%?%F%{= wb}%:%{= wk}%?$LOGNAME@%H %+15<%L=%{= kw} %-w%60L>%{
 
 # hardstatus alwaysignore
 hardstatus alwayslastline "%Y-%m-%d %c"
-

@@ -1,3 +1,4 @@
+#fpath=(~/lib/zsh ~/.zsh-completions $fpath)
 fpath=(~/lib/zsh $fpath)
 
 ############ options
@@ -42,10 +43,22 @@ unsetopt beep
 
 
 ############ env for zsh
-prompt_vcs='%1(v|%F{green}%1v%f|)'
-export PROMPT="[%n@%m %3d]%(#.#.$) "
-#export PROMPT="[%n@%m %3d${prompt_vcs}]%(#.#.$) "
-RPROMPT=$prompt_vcs
+
+export ZSHFG=`expr $RANDOM % 250` # initial
+
+setprompt() {
+  prompt_vcs='%1(v|%F{green}%1v%f|)'
+  #export PROMPT="[%n@%m %3d]%(#.#.$) "
+  export YUNO='✘╹◡╹✘ '
+  #export YUNO='× / _ / ×'
+  export ZSHFG=`expr \( $ZSHFG + 1 \) % 250`
+  #export PROMPT="%F{$ZSHFG}${YUNO}%f< "
+  #export PROMPT="[%n@%m %3d${prompt_vcs}]%(#.#.$) "
+  export PROMPT="[%n@%m %2d] %F{$ZSHFG}${YUNO}%f< "
+  RPROMPT=$prompt_vcs
+}
+
+setprompt
 export HISTFILE=$HOME/.zsh_history
 export SAVEHIST=1000
 export HISTSIZE=8192
@@ -101,6 +114,7 @@ precmd () {
   psvar=()
   LANG=en_US.UTF-8 vcs_info
   [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+  setprompt
 }
 
 ## Ctrl-Z
@@ -201,6 +215,7 @@ alias t='git status'
 alias gup="git stash; git pull --rebase origin master; git stash apply"
 alias a='git add'
 alias d='git diff'
+alias gg='git grep'
 
 alias b='bundle'
 alias be='bundle exec'
@@ -208,6 +223,7 @@ alias be='bundle exec'
 alias r="rails"
 alias rs="rake spec"
 alias rr="rake routes"
+alias fs="foreman start"
 
 alias s="screen -U"
 alias sx="screen -U -x"

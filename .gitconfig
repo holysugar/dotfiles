@@ -1,9 +1,8 @@
 [core]
     excludesfile = ~/.gitignore
     editor = vim
-[user]
-    name = holysugar
-    email = holysugar@gmail.com
+[include]
+    path = ~/.gitconfig.local
 [alias]
     co = checkout
     ci = commit
@@ -43,6 +42,14 @@
       git checkout master; \
       git branch -d upstream-master; \
     ' __dummy__"
+
+    pr = "!bash -xc ' \
+      username=$1; \
+      orig=`git config remote.upstream.url`; \
+      url=${orig/aiming/$username} ; \
+      echo $url; \
+    ' __dummy__"
+
 
 [color]
     ui = true

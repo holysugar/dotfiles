@@ -3,7 +3,7 @@
 set nocompatible  " disable vi compatibility.
 set history=256  " Number of things to remember in history.
 set autowrite  " Writes on make/shell commands
-set autoread  
+set autoread
 set timeoutlen=250
 set clipboard+=unnamed  " Yanks go on clipboard instead.
 set pastetoggle=<F10> "  toggle between paste and normal: for 'safer' pasting from keyboard
@@ -28,7 +28,7 @@ set showmatch
 
 " Formatting "{{{
 set fo+=o  " Automatically insert the current comment leader after hitting 'o' or 'O' in Normal mode.
-set fo+=mB " for multibyte character 
+set fo+=mB " for multibyte character
 "set fo-=r  " Do not automatically insert a comment leader after an enter
 set fo-=t  " Do no auto-wrap text using textwidth (does not apply to comments)
 
@@ -139,68 +139,70 @@ endif
 " Plugins " {{{
 filetype off
 
-set runtimepath+=~/.vim/bundle/vundle/
-call vundle#rc()
+set runtimepath+=~/.vim/neobundle.vim.git/
+set runtimepath+=~/.vim/neobundle
+call neobundle#rc(expand('~/.vim/neobundle'))
 
 " Vim
-Bundle "YankRing.vim"
-Bundle "http://github.com/thinca/vim-poslist.git"
+NeoBundle "YankRing.vim"
+NeoBundle "https://github.com/thinca/vim-poslist.git"
 
 " Programming
-Bundle "rails.vim"
-Bundle "http://github.com/thinca/vim-quickrun.git"
-Bundle "http://github.com/gmarik/snipmate.vim.git"
-Bundle "http://github.com/rstacruz/sparkup.git", {'rtp': 'vim/'}
-Bundle "http://github.com/kchmck/vim-coffee-script"
-Bundle "stickykey"
-Bundle "haml.zip"
-Bundle "http://github.com/bbommarito/vim-slim.git"
+NeoBundle "rails.vim"
+NeoBundle "https://github.com/thinca/vim-quickrun.git"
+NeoBundle "https://github.com/gmarik/snipmate.vim.git"
+NeoBundle "https://github.com/rstacruz/sparkup.git", {'rtp': 'vim/'}
+NeoBundle "https://github.com/kchmck/vim-coffee-script"
+NeoBundle "stickykey"
+NeoBundle "haml.zip"
+NeoBundle "https://github.com/bbommarito/vim-slim.git"
+NeoBundle "https://github.com/bdd/vim-scala.git"
 
 " Syntax highlight
-Bundle "jQuery"
-Bundle "cucumber.zip"
-Bundle "Markdown"
-Bundle "https://github.com/timcharper/textile.vim.git"
+NeoBundle "jQuery"
+NeoBundle "cucumber.zip"
+NeoBundle "Markdown"
+NeoBundle "https://github.com/timcharper/textile.vim.git"
 
 " Git integration
-Bundle "https://github.com/tpope/vim-git"
-Bundle "fugitive.vim"
-Bundle "http://github.com/mattn/gist-vim.git"
+NeoBundle "https://github.com/tpope/vim-git"
+NeoBundle "fugitive.vim"
+NeoBundle "https://github.com/mattn/gist-vim.git"
 
 " (HT|X)ml tool
-Bundle "ragtag.vim"
-Bundle "matchit.zip"
+NeoBundle "ragtag.vim"
+NeoBundle "matchit.zip"
 
 " Utility
-Bundle "repeat.vim"
-Bundle "surround.vim"
-"Bundle "SuperTab"
-Bundle "file-line"
-Bundle "Align"
+NeoBundle "repeat.vim"
+NeoBundle "surround.vim"
+"NeoBundle "SuperTab"
+NeoBundle "file-line"
+NeoBundle "Align"
 
 " FuzzyFinder
-Bundle "L9"
-Bundle "FuzzyFinder"
+NeoBundle "L9"
+NeoBundle "FuzzyFinder"
 let g:fuf_modesDisable = []
 
 " Zoomwin
-Bundle "ZoomWin"
+NeoBundle "ZoomWin"
 
 " Ack
-Bundle "ack.vim"
+NeoBundle "ack.vim"
 
 " tComment
-Bundle "tComment"
+NeoBundle "tComment"
 
 "" Command-T
-"" Bundle "git://git.wincent.com/command-t.git"
+"" NeoBundle "git://git.wincent.com/command-t.git"
 " let g:CommandTMatchWindowAtTop=1 " show window at top
 
 " Navigation
-Bundle "http://github.com/gmarik/vim-visual-star-search.git"
+NeoBundle "http://github.com/gmarik/vim-visual-star-search.git"
 
 " neocomplcache
-Bundle "neocomplcache"
+NeoBundle "neocomplcache"
 let g:neocomplcache_enable_at_startup = 1
 
 filetype plugin indent on
