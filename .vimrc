@@ -155,8 +155,10 @@ NeoBundle "https://github.com/rstacruz/sparkup.git", {'rtp': 'vim/'}
 NeoBundle "https://github.com/kchmck/vim-coffee-script"
 NeoBundle "stickykey"
 NeoBundle "haml.zip"
-NeoBundle "https://github.com/bbommarito/vim-slim.git"
-NeoBundle "https://github.com/bdd/vim-scala.git"
+NeoBundle "slim-template/vim-slim.git"
+NeoBundle "derekwyatt/vim-scala"
+
+NeoBundle 'chrisbra/csv.vim'
 
 " Syntax highlight
 NeoBundle "jQuery"
@@ -202,8 +204,8 @@ NeoBundle "tComment"
 NeoBundle "http://github.com/gmarik/vim-visual-star-search.git"
 
 " neocomplcache
-NeoBundle "neocomplcache"
-let g:neocomplcache_enable_at_startup = 1
+"NeoBundle "neocomplcache"
+"let g:neocomplcache_enable_at_startup = 1
 
 filetype plugin indent on
 " " }}}

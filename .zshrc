@@ -1,5 +1,4 @@
 #fpath=(~/lib/zsh ~/.zsh-completions $fpath)
-fpath=(~/lib/zsh $fpath)
 
 ############ options
 # CD
@@ -54,13 +53,16 @@ setprompt() {
   export ZSHFG=`expr \( $ZSHFG + 1 \) % 250`
   #export PROMPT="%F{$ZSHFG}${YUNO}%f< "
   #export PROMPT="[%n@%m %3d${prompt_vcs}]%(#.#.$) "
-  export PROMPT="[%n@%m %2d] %F{$ZSHFG}${YUNO}%f< "
-  RPROMPT=$prompt_vcs
+  if [ -n "$AWS_ACCESS_KEY" ]; then PROMPT_AWS="(AWS:${AWS_ACCESS_KEY:0:6})"; fi
+  export SUSHI=$'\U1F363 '
+  export INVADOR=$'\U1F47E '
+  export PROMPT="%F{yellow}$PROMPT_AWS%f[%n@%m %2d] %F{$ZSHFG}${YUNO}%f%(?.${SUSHI}.${INVADOR})< "
+  RPROMPT="$prompt_vcs %F{cyan}$DOCKER_HOST%f"
 }
 
 setprompt
 export HISTFILE=$HOME/.zsh_history
-export SAVEHIST=1000
+export SAVEHIST=10000
 export HISTSIZE=8192
 if [ -z $LANG ]; then
   export LANG=ja_JP.UTF-8
@@ -227,6 +229,11 @@ alias fs="foreman start"
 
 alias s="screen -U"
 alias sx="screen -U -x"
+
+alias v=vagrant
+alias d=docker
+alias dl='docker ps -l -q'
+dshell() { docker run --entrypoint /bin/bash -t -i $1 -l }
 
 alias w-rails="watchr ~/rails.watchr"
 ffrmig() {
