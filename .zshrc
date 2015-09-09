@@ -167,6 +167,19 @@ dabbrev-complete () {
   compadd - "${reply[@]%[*/=@|]}"
 }
 
+## ghq
+# http://qiita.com/strsk/items/9151cef7e68f0746820d
+function peco-src () {
+  local selected_dir=$(ghq list -p | peco --query "$LBUFFER")
+  if [ -n "$selected_dir" ]; then
+    BUFFER="cd ${selected_dir}"
+    zle accept-line
+  fi
+  zle clear-screen
+}
+zle -N peco-src
+bindkey '^]' peco-src
+
 zle -C dabbrev-complete menu-complete dabbrev-complete
 bindkey '^xn'  dabbrev-complete
 bindkey '^x^_'  dabbrev-menu-complete
