@@ -67,7 +67,7 @@ set nolist " Display unprintable characters f12 - switches
 set foldenable " Turn on folding
 set foldmethod=marker " Fold on the marker
 set foldlevel=100 " Don't autofold anything (but I can still fold manually)
-set foldopen=block,hor,mark,percent,quickfix,tag " what movements open folds 
+set foldopen=block,hor,mark,percent,quickfix,tag " what movements open folds
 
 set mouse-=a   " Disable mouse
 set mousehide  " Hide mouse after chars typed
@@ -139,9 +139,10 @@ endif
 " Plugins " {{{
 filetype off
 
-set runtimepath+=~/.vim/neobundle.vim.git/
-set runtimepath+=~/.vim/neobundle
-call neobundle#rc(expand('~/.vim/neobundle'))
+set runtimepath+=~/.vim/bundle/neobundle.vim/
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Vim
 NeoBundle "YankRing.vim"
@@ -207,6 +208,8 @@ NeoBundle "http://github.com/gmarik/vim-visual-star-search.git"
 "NeoBundle "neocomplcache"
 "let g:neocomplcache_enable_at_startup = 1
 
+call neobundle#end()
+
 filetype plugin indent on
 " " }}}
 
@@ -256,7 +259,7 @@ nnoremap          <C-J> <Plug>(poslist-next-pos)
 nnoremap          <C-K> <Plug>(poslist-prev-pos)
 
 " Split line
-nnoremap <silent> <C-S-J> gEa<CR><ESC>ew 
+nnoremap <silent> <C-S-J> gEa<CR><ESC>ew
 
 nnoremap          <LocalLeader>o :ZoomWin<CR>
 vnoremap          <LocalLeader>o <C-C>:ZoomWin<CR>
@@ -267,7 +270,7 @@ nnoremap          <C-W>+o :ZoomWin<CR>
 vnoremap <silent> <LocalLeader>= yP
 nnoremap <silent> <LocalLeader>= YP
 
-" Tabs 
+" Tabs
 "nnoremap <silent> <LocalLeader>[ :tabprev<CR>
 "nnoremap <silent> <LocalLeader>] :tabnext<CR>
 
@@ -279,10 +282,10 @@ noremap  <silent> <C-W>v :vnew<CR>
 noremap  <silent> <C-W>s :snew<CR>
 
 " show/Hide hidden Chars
-"map <silent> <F12> :set invlist<CR>     
+"map <silent> <F12> :set invlist<CR>
 
 " generate HTML version current buffer using current color scheme
-noremap  <silent> <LocalLeader>2h :runtime! syntax/2html.vim<CR> 
+noremap  <silent> <LocalLeader>2h :runtime! syntax/2html.vim<CR>
 " " }}}
 
 
