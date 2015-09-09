@@ -47,16 +47,12 @@ export ZSHFG=`expr $RANDOM % 250` # initial
 
 setprompt() {
   prompt_vcs='%1(v|%F{green}%1v%f|)'
-  #export PROMPT="[%n@%m %3d]%(#.#.$) "
-  export YUNO='✘╹◡╹✘ '
-  #export YUNO='× / _ / ×'
+  #export FACE='✘╹◡╹✘ '
+  export FACE='ØωØ '
   export ZSHFG=`expr \( $ZSHFG + 1 \) % 250`
-  #export PROMPT="%F{$ZSHFG}${YUNO}%f< "
-  #export PROMPT="[%n@%m %3d${prompt_vcs}]%(#.#.$) "
-  if [ -n "$AWS_ACCESS_KEY" ]; then PROMPT_AWS="(AWS:${AWS_ACCESS_KEY:0:6})"; fi
   export SUSHI=$'\U1F363 '
   export INVADOR=$'\U1F47E '
-  export PROMPT="%F{yellow}$PROMPT_AWS%f[%n@%m %2d] %F{$ZSHFG}${YUNO}%f%(?.${SUSHI}.${INVADOR})< "
+  export PROMPT="%F{yellow}$PROMPT_AWS%f[%n@%m %2d] %F{$ZSHFG}${FACE}%f%(?.${SUSHI}.${INVADOR})< "
   RPROMPT="$prompt_vcs %F{cyan}$DOCKER_HOST%f"
 }
 
@@ -70,12 +66,10 @@ fi
 
 #export WORDCHARS='*?_.[]~=&;!#$%^(){}<>'
 
-
 ############ autoload
 
 autoload -U compinit ; compinit
 zstyle ':completion:*:default' menu select=1
-#zstyle ':completion:*' list-colors di=34 fi=0
 
 autoload -U zmv
 
@@ -88,9 +82,6 @@ zstyle ':vcs_info:*' actionformats '(%r)-(%b:%a)-(%S)'
 bindkey -e
 bindkey ' ' magic-space
 bindkey "^[h" backward-kill-word
-
-#compctl -g '(|.)*(-/)' cd pushd
-#compctl -K ftp_hosts_complete ftp ncftp
 
 bindkey -s "^xi" '\C-a`\C-e`\C-aforeach i \(\C-e\)'
 bindkey -s "^xe" '\C-a =( \C-e )\C-a'
@@ -118,27 +109,6 @@ precmd () {
   [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
   setprompt
 }
-
-## Ctrl-Z
-#run-fg-editor() {
-#  zle push-input
-#  BUFFER="fg %$EDITOR:t"
-#  zle accept-line
-#}
-#zle -N run-fg-editor
-#bindkey '^Z' run-fg-editor
-
-
-# URL Handler
-#if autoload +X -U _accept_line_with_url > /dev/null 2>&1; then
-#  zle -N accept-line-with-url _accept_line_with_url
-#  bindkey '^M' accept-line-with-url
-#  bindkey '^J' accept-line-with-url
-#  export WWW_BROWSER="w3m %s"
-#  export DOWNLOADER="wget"
-#  browse_of_download_method="auto"
-#fi
-
 
 # for screen
 # http://www.nijino.com/ari/diary/?20020614
@@ -170,11 +140,6 @@ if [ "$TERM" = "screen" ]; then
           return
         fi
       ;;
-#      cd)
-#        if (( $#cmd == 2)); then
-#          cmd[1]=$cmd[2]
-#        fi
-#      ;;
       *)
         echo -n "k$cmd[1]:t\\"
         return
@@ -190,8 +155,6 @@ if [ "$TERM" = "screen" ]; then
   }
   chpwd
 fi
-
-
 
 # dabbrev
 HARDCOPYFILE=/tmp/${USERNAME}-screen-hardcopy
