@@ -15,7 +15,7 @@ set modelines=5 " default numbers of lines to read for modeline instructions
 set writebackup
 set backup
 set directory=/tmp/ " prepend(^=) $HOME/.tmp/ to default path; use full path as backup filename(//)
-set backupdir=~/.vimbackup
+set backupdir=~/.vim/backup
 " Buffers
 set hidden " The current buffer can be put to the background without writing to disk
 " Match and search
@@ -202,7 +202,7 @@ NeoBundle "tComment"
 " let g:CommandTMatchWindowAtTop=1 " show window at top
 
 " Navigation
-NeoBundle "http://github.com/gmarik/vim-visual-star-search.git"
+NeoBundle "https://github.com/gmarik/vim-visual-star-search.git"
 
 " neocomplcache
 "NeoBundle "neocomplcache"
