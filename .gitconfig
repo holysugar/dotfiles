@@ -1,55 +1,29 @@
 [core]
     excludesfile = ~/.gitignore
     editor = vim
+
 [include]
     path = ~/.gitconfig.local
+
 [alias]
     co = checkout
-    ci = commit
+    ci = commit -v
     st = status
     up = pull --rebase origin master
     di = diff --color
     dc = diff --cached --color
-    kokomade = tag -f 'ここまで読んだ' origin/master
-    newspaper = log -p --reverse 'ここまで読んだ'..origin/master
     tree = log --graph --pretty=format:'%C(yellow)%h%Creset - %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(red)%d%Creset' --abbrev-commit --date=relative
+    tree2 = log --graph --all --branches --date=short --decorate --pretty=format:'%C(yellow)%h %Cgreen%ad %Cblue%cn %Creset%s %C(reverse)%C(auto)%D'
     topic = checkout origin/master -b
     current-branch = describe --all --contains HEAD
-    push-for-review = "!sh -c 'git push origin HEAD:refs/for/master/`git current-branch`'"
-    pfr = "!sh -xc ' \
-      reviewer=$1; \
-      topic=${2:-`git current-branch`}; \
-      if [ -n \"$reviewer\" ]; then \
-        git push origin HEAD:refs/for/master/${topic} --receive-pack=\"git receive-pack --reviewer=$reviewer\" ;\
-      else \
-        git push origin HEAD:refs/for/master/${topic} ;\
-      fi; \
-    ' __dummy__"
-
-    ffr = "!sh -c ' \
-      change=$1; \
-      if [ -z \"$change\" ]; then exit 1; fi; \
-      patchset=${2:-1}; \
-      val=`expr $change % 100`; \
-      dir=`printf '%02d' $val` ; \
-      git fetch origin refs/changes/$dir/$change/$patchset && git checkout FETCH_HEAD -b $change-$patchset; \
-    ' __dummy__"
-
-    sync = "!sh -xc ' \
-      origin=${1:-origin}; \
-      upstream=${2:-upstream}; \
-      git fetch $origin && git fetch $upstream && git checkout $upstream/master -b upstream-master && git push $origin upstream-master:master; \
-      git checkout master; \
-      git branch -d upstream-master; \
-    ' __dummy__"
-
-    pr = "!bash -xc ' \
-      username=$1; \
-      orig=`git config remote.upstream.url`; \
-      url=${orig/aiming/$username} ; \
-      echo $url; \
-    ' __dummy__"
-
 
 [color]
     ui = true
+[user]
+	  name = HORII Keima
+	  email = holysugar@gmail.com
+[push]
+	  default = simple
+
+[ghq]
+    root = ~/src

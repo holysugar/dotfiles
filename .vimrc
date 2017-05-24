@@ -208,6 +208,8 @@ NeoBundle "http://github.com/gmarik/vim-visual-star-search.git"
 "NeoBundle "neocomplcache"
 "let g:neocomplcache_enable_at_startup = 1
 
+NeoBundle 'yaasita/slack.vim'
+
 call neobundle#end()
 
 filetype plugin indent on
@@ -286,6 +288,9 @@ noremap  <silent> <C-W>s :snew<CR>
 
 " generate HTML version current buffer using current color scheme
 noremap  <silent> <LocalLeader>2h :runtime! syntax/2html.vim<CR>
+
+" surround
+noremap          <LocalLeader>" ysiW"<CR>
 " " }}}
 
 

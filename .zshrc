@@ -47,13 +47,14 @@ export ZSHFG=`expr $RANDOM % 250` # initial
 
 setprompt() {
   prompt_vcs='%1(v|%F{green}%1v%f|)'
+  gcpproject=`gcloud config get-value project 2> /dev/null`
   #export FACE='✘╹◡╹✘ '
   export FACE='ØωØ '
   export ZSHFG=`expr \( $ZSHFG + 1 \) % 250`
   export SUSHI=$'\U1F363 '
   export INVADOR=$'\U1F47E '
   export PROMPT="%F{yellow}$PROMPT_AWS%f[%n@%m %2d] %F{$ZSHFG}${FACE}%f%(?.${SUSHI}.${INVADOR})< "
-  RPROMPT="$prompt_vcs %F{cyan}$DOCKER_HOST%f"
+  RPROMPT="$prompt_vcs %F{cyan}<$gcpproject>%f"
 }
 
 setprompt
@@ -74,8 +75,10 @@ zstyle ':completion:*:default' menu select=1
 autoload -U zmv
 
 autoload -Uz vcs_info
-zstyle ':vcs_info:*' formats '(%r)-(%b)-(%S)'
-zstyle ':vcs_info:*' actionformats '(%r)-(%b:%a)-(%S)'
+#zstyle ':vcs_info:*' formats '(%r)-(%b)-(%S)'
+#zstyle ':vcs_info:*' actionformats '(%r)-(%b:%a)-(%S)'
+zstyle ':vcs_info:*' formats '(%r)-(%b)'
+zstyle ':vcs_info:*' actionformats '(%r)-(%b:%a)'
 
 ############ bindkey
 
@@ -83,8 +86,31 @@ bindkey -e
 bindkey ' ' magic-space
 bindkey "^[h" backward-kill-word
 
-bindkey -s "^xi" '\C-a`\C-e`\C-aforeach i \(\C-e\)'
-bindkey -s "^xe" '\C-a =( \C-e )\C-a'
+bindkey-e-inline() {
+  zle vi-insert
+  local pos
+  pos=$CURSOR
+  zle push-line
+  bindkey -e
+  zle get-line
+  CURSOR=$pos
+}
+
+bindkey-v-inline() {
+  local pos
+  pos=$CURSOR
+  zle push-line
+  bindkey -v
+  zle get-line
+  zle vi-cmd-mode
+  CURSOR=$pos
+}
+
+zle -N bindkey-e-inline
+bindkey -M viins "^E" bindkey-e-inline
+bindkey -M vicmd "^E" bindkey-e-inline
+zle -N bindkey-v-inline
+bindkey "^xv" bindkey-v-inline
 
 bindkey -s maek make
 bindkey -s amke make
@@ -184,6 +210,8 @@ zle -C dabbrev-complete menu-complete dabbrev-complete
 bindkey '^xn'  dabbrev-complete
 bindkey '^x^_'  dabbrev-menu-complete
 
+
+
 alias xulfx="TERM=xterm-color /Applications/Firefox.app/Contents/MacOS/firefox -P xuldev -jsconsole"
 alias gvim="TERM=xterm-color /Applications/MacPorts/Vim/Vim.app/Contents/MacOS/Vim -g"
 
@@ -195,8 +223,20 @@ alias a='git add'
 alias d='git diff'
 alias gg='git grep'
 
+alias -g C='`git log --oneline | peco | cut -d" " -f1`'
+alias -g IN='`gcloud compute instances list | tail -n +2 | peco | awk '\''{print $1 " --zone " $2}'\''`'
+alias -g GCPP='`gcloud projects list | peco | awk '\''{print $1}'\''`'
+
+alias -g PODS='`kubectl get pods | peco | awk '\''{print $1}'\''`'
+alias -g POD='`kubectl get pods | grep web-$(kubectl describe svc production | grep "^Selector:" | sed -e '\''s/.*color=\(.*\),.*/\1/'\'') | awk '\''{print $1}'\'' | tail -1 `'
+
+alias gcpch='gcloud config set project GCPP'
+
+#INS() { gcloud compute instances list --project $1 | tail -n +2 | peco; echo } #| echo awk '{ print " --zone " $2 " " $1; }' }
+
 alias b='bundle'
 alias be='bundle exec'
+alias dbe='dotenv bundle exec'
 
 alias r="rails"
 alias rs="rake spec"
@@ -216,4 +256,11 @@ ffrmig() {
   git config alias.ffr >/dev/null && git ffr $1 $2 && bundle install && rake db:create db:migrate
 }
 
+alias cssh="gcloud compute ssh"
+
+alias cf='command functions'
+
+eval "$(direnv hook zsh)"
+
+. ~/.zshenv
 # vim: set sw=2 sts=2 ts=2:
