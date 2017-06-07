@@ -5,7 +5,8 @@ if [ -d $HOME/.anyenv ] ; then
   eval "$(anyenv init -)"
 fi
 
-# The next line updates PATH for the Google Cloud SDK.
-source $HOME/google-cloud-sdk/path.zsh.inc
+if [ -d $HOME/google-cloud-sdk ] ; then
+  source $HOME/google-cloud-sdk/path.zsh.inc
+fi
 
 export PATH
