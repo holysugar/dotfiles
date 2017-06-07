@@ -35,6 +35,8 @@ brew 'ffmpeg', args: %w(
   with-x265 with-webp with-rtmpdump
 )
 
+brew 'yarn'
+
 tap 'mpv-player/mpv'
 brew 'mpv', args: %w(
   with-bundle HEAD
