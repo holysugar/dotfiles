@@ -43,24 +43,26 @@ unsetopt beep
 
 ############ env for zsh
 
-export ZSHFG=`expr $RANDOM % 250` # initial
+ZSHFG=`expr $RANDOM % 250` # initial
 
 setprompt() {
   prompt_vcs='%1(v|%F{green}%1v%f|)'
   gcpproject=`gcloud config get-value project 2> /dev/null`
   #export FACE='✘╹◡╹✘ '
-  export FACE='ØωØ '
-  export ZSHFG=`expr \( $ZSHFG + 1 \) % 250`
-  export SUSHI=$'\U1F363 '
-  export INVADOR=$'\U1F47E '
-  export PROMPT="%F{yellow}$PROMPT_AWS%f[%n@%m %2d] %F{$ZSHFG}${FACE}%f%(?.${SUSHI}.${INVADOR})< "
+  FACE='ØωØ '
+  ZSHFG=`expr \( $ZSHFG + 1 \) % 250`
+  SUSHI=$'\U1F363 '
+  INVADOR=$'\U1F47E '
+  PROMPT="%F{yellow}[%n@%m %2d]%f %F{$ZSHFG}${FACE}%f%(?.${SUSHI}.${INVADOR})< "
   RPROMPT="$prompt_vcs %F{cyan}<$gcpproject>%f"
 }
 
 setprompt
-export HISTFILE=$HOME/.zsh_history
-export SAVEHIST=10000
-export HISTSIZE=8192
+
+HISTFILE=$HOME/.zsh_history
+SAVEHIST=10000
+HISTSIZE=8192
+
 if [ -z $LANG ]; then
   export LANG=ja_JP.UTF-8
 fi
