@@ -69,6 +69,8 @@ fi
 
 #export WORDCHARS='*?_.[]~=&;!#$%^(){}<>'
 
+REPORTTIME=10
+
 ############ autoload
 
 autoload -U compinit ; compinit
