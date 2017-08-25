@@ -233,8 +233,11 @@ alias -g GCPP='`gcloud projects list | peco | awk '\''{print $1}'\''`'
 
 alias -g PODS='`kubectl get pods | peco | awk '\''{print $1}'\''`'
 alias -g POD='`kubectl get pods | grep web-$(kubectl describe svc production | grep "^Selector:" | sed -e '\''s/.*color=\(.*\),.*/\1/'\'') | awk '\''{print $1}'\'' | tail -1 `'
+alias -g KUBECON='`kubectl config current-context`'
+alias -g KUBECONS='`kubectl config get-contexts -o=name | peco `'
 
 alias gcpch='gcloud config set project GCPP'
+alias kubeconch='kubectl config use-context KUBECONS'
 
 #INS() { gcloud compute instances list --project $1 | tail -n +2 | peco; echo } #| echo awk '{ print " --zone " $2 " " $1; }' }
 
