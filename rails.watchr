@@ -1,5 +1,7 @@
 # vim: ft=ruby fileencoding=utf-8
 
+# observr for rails with screen
+
 # --------------------------------------------------
 # Notifier to screen
 # --------------------------------------------------
@@ -44,7 +46,7 @@ def notify_screen_result(result, message)
   notify_screen(message, :white, succeeded ? :green : :red)
 end
 
-def notify_screen_rspec(result = nil, message = '')
+def notify_screen_test(result = nil, message = '')
   case result
   when nil
     notify_screen(message[0..80], :default, :default)
@@ -56,48 +58,45 @@ def notify_screen_rspec(result = nil, message = '')
 end
 
 # --------------------------------------------------
-# RSpec
+# Minitest
 # --------------------------------------------------
-def all_spec_files
-  Dir['spec/**/*_spec.rb']
+def all_test_files
+  Dir['test/**/*_test.rb']
 end
 
-def run_spec_matching(thing_to_match)
-  matches = all_spec_files.grep(/#{thing_to_match}/i)
+def run_test_matching(thing_to_match)
+  matches = all_test_files.grep(/#{thing_to_match}/i)
   if matches.empty?
     puts "Sorry, thanks for playing, but there were no matches for #{thing_to_match}"
   else
-    run_spec matches.join(' ')
+    run_test matches.join(' ')
   end
 end
 
-def run_spec(files_to_run)
-  notify_spec_starting("Running: #{files_to_run}")
+def run_test(files_to_run = nil)
+  command = "bin/rails test #{files_to_run}"
+  notify_test_starting("Running: #{command}")
 
-  option = "-X -cfs"
-  #option += ' --fail-fast'
-  result = system("rspec #{option} #{files_to_run}")
+  result = system(command)
   output = ''
-  #output = `bundle exec rspec #{option} #{files_to_run}`
-  #result = $?
   no_int_for_you
 
-  notify_spec_result(result, output)
+  notify_test_result(result, output)
 end
 
-def run_all_specs
-  run_spec(all_spec_files.join(' '))
+def run_all_tests
+  run_test
 end
 
-def notify_spec_starting(message)
+def notify_test_starting(message)
   puts message
-  notify_screen_rspec(nil, message)
+  notify_screen_test(nil, message)
 end
 
-def notify_spec_result(result, output = '')
+def notify_test_result(result, output = '')
   puts output
   puts "$?: #{$?} #{result}"
-  notify_screen_rspec(result)
+  notify_screen_test(result)
 end
 
 
@@ -113,13 +112,13 @@ end
 # --------------------------------------------------
 # Watchr Rules
 # --------------------------------------------------
-watch('^spec/(.*)_spec\.rb')    { |m| run_spec_matching(m[1]) }
-watch('^app/(.*)\.rb')          { |m| run_spec_matching(m[1]) }
-watch('^app/(.*\.haml)')        { |m| run_spec_matching(m[1]) }
-watch('^app/(.*\.slim)')        { |m| run_spec_matching(m[1]) }
-watch('^lib/(.*)\.rb')          { |m| run_spec_matching(m[1]) }
-watch('^spec/spec_helper\.rb')  { run_all_specs }
-watch('^spec/support/.*\.rb')   { run_all_specs }
+watch('^test/(.*)_test\.rb')    { |m| run_test_matching(m[1]) }
+watch('^app/(.*)\.rb')          { |m| run_test_matching(m[1]) }
+watch('^app/(.*\.haml)')        { |m| run_test_matching(m[1]) }
+watch('^app/(.*\.slim)')        { |m| run_test_matching(m[1]) }
+watch('^lib/(.*)\.rb')          { |m| run_test_matching(m[1]) }
+watch('^test/test_helper\.rb')  { run_all_tests }
+watch('^test/support/.*\.rb')   { run_all_tests }
 #
 watch('Gemfile') { run_bundle }
 
@@ -140,7 +139,7 @@ Signal.trap 'INT' do
     puts "   Did you just send me an INT? Ugh.  I'll quit for real if you do it again."
     @sent_an_int = true
     Kernel.sleep 1.5
-    run_all_specs
+    run_all_tests
   end
 end
 
