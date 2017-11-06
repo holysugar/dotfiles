@@ -2,6 +2,7 @@
 
 # observr for rails with screen
 
+$rubocop_enabled = system("which rubocop > /dev/null")
 # --------------------------------------------------
 # Notifier to screen
 # --------------------------------------------------
@@ -74,12 +75,18 @@ def run_test_matching(thing_to_match)
 end
 
 def run_test(files_to_run = nil)
-  command = "bin/rails test #{files_to_run}"
-  notify_test_starting("Running: #{command}")
+  pre = FileTest.exist?(".env") ? "dotenv" : ""
 
+  if $rubocop_enabled
+    command = "rubocop #{files_to_run}"
+    notify_test_starting("Running: #{command}")
+    system(command)
+  end
+
+  command = "#{pre} bin/rails test #{files_to_run}"
+  notify_test_starting("Running: #{command}")
   result = system(command)
   output = ''
-  no_int_for_you
 
   notify_test_result(result, output)
 end
@@ -130,15 +137,16 @@ def no_int_for_you
   @sent_an_int = nil
 end
 
+@sent_an_int = Time.now
+
 Signal.trap 'INT' do
-  if @sent_an_int then
+  if Time.now - @sent_an_int < 2
     puts "   A second INT?  Ok, I get the message.  Shutting down now."
     clear_screen
     exit
   else
     puts "   Did you just send me an INT? Ugh.  I'll quit for real if you do it again."
-    @sent_an_int = true
-    Kernel.sleep 1.5
+    @sent_an_int = Time.now
     run_all_tests
   end
 end
