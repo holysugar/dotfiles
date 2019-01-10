@@ -49,7 +49,6 @@ setprompt() {
   prompt_vcs='%1(v|%F{green}%1v%f|)'
   gcpproject=`gcloud config get-value project 2> /dev/null`
   #export FACE='✘╹◡╹✘ '
-  FACE='ØωØ '
   ZSHFG=`expr \( $ZSHFG + 1 \) % 250`
   SUSHI=$'\U1F363 '
   INVADOR=$'\U1F47E '
@@ -67,8 +66,6 @@ if [ -z $LANG ]; then
   export LANG=ja_JP.UTF-8
 fi
 
-#export WORDCHARS='*?_.[]~=&;!#$%^(){}<>'
-
 REPORTTIME=10
 
 ############ autoload
@@ -79,8 +76,6 @@ zstyle ':completion:*:default' menu select=1
 autoload -U zmv
 
 autoload -Uz vcs_info
-#zstyle ':vcs_info:*' formats '(%r)-(%b)-(%S)'
-#zstyle ':vcs_info:*' actionformats '(%r)-(%b:%a)-(%S)'
 zstyle ':vcs_info:*' formats '(%r)-(%b)'
 zstyle ':vcs_info:*' actionformats '(%r)-(%b:%a)'
 
@@ -90,42 +85,9 @@ bindkey -e
 bindkey ' ' magic-space
 bindkey "^[h" backward-kill-word
 
-bindkey-e-inline() {
-  zle vi-insert
-  local pos
-  pos=$CURSOR
-  zle push-line
-  bindkey -e
-  zle get-line
-  CURSOR=$pos
-}
-
-bindkey-v-inline() {
-  local pos
-  pos=$CURSOR
-  zle push-line
-  bindkey -v
-  zle get-line
-  zle vi-cmd-mode
-  CURSOR=$pos
-}
-
-zle -N bindkey-e-inline
-bindkey -M viins "^E" bindkey-e-inline
-bindkey -M vicmd "^E" bindkey-e-inline
-zle -N bindkey-v-inline
-bindkey "^xv" bindkey-v-inline
-
 bindkey -s maek make
 bindkey -s amke make
 bindkey -s grpe grep
-bindkey -s 'sv ndi' 'svn di'
-bindkey -s 'sv nst' 'svn st'
-
-
-#bindkey -v
-#bindkey '^r' history-incremental-search-backward
-
 
 ############ functions
 
@@ -143,60 +105,6 @@ precmd () {
 # for screen
 # http://www.nijino.com/ari/diary/?20020614
 
-if [ "$TERM" = "screen" ]; then
-  chpwd () { echo -n "k`dirs`\\" }
-  preexec() {
-    # see [zsh-workers:13180]
-    # http://www.zsh.org/mla/workers/2000/msg03993.html
-    emulate -L zsh
-    local -a cmd; cmd=(${(z)2})
-    case $cmd[1] in
-      fg)
-        if (( $#cmd == 1 )); then
-          cmd=(builtin jobs -l %+)
-        else
-          cmd=(builtin jobs -l $cmd[2])
-        fi
-      ;;
-      %*)
-        cmd=(builtin jobs -l $cmd[1])
-      ;;
-      sudo)
-        if (($#cmd == 2)); then
-          echo -n "k(sudo)$cmd[2]:t\\"
-          return
-        else
-          echo -n "k$cmd[1]:t\\"
-          return
-        fi
-      ;;
-      *)
-        echo -n "k$cmd[1]:t\\"
-        return
-      ;;
-    esac
-
-    local -A jt; jt=(${(kv)jobtexts})
-
-    echo $cmd
-    $cmd >>(read num rest
-    cmd=(${(z)${(e):-\$jt$num}})
-    echo -n "k$cmd[1]:t\\") 2>/dev/null
-  }
-  chpwd
-fi
-
-# dabbrev
-HARDCOPYFILE=/tmp/${USERNAME}-screen-hardcopy
-touch $HARDCOPYFILE
-
-dabbrev-complete () {
-  local reply lines=80
-  screen -X eval "hardcopy -h $HARDCOPYFILE"
-  reply=($(sed '/^$/d' $HARDCOPYFILE | sed '$ d' | tail -$lines))
-  compadd - "${reply[@]%[*/=@|]}"
-}
-
 ## ghq
 # http://qiita.com/strsk/items/9151cef7e68f0746820d
 function peco-src () {
@@ -213,8 +121,6 @@ bindkey '^]' peco-src
 zle -C dabbrev-complete menu-complete dabbrev-complete
 bindkey '^xn'  dabbrev-complete
 bindkey '^x^_'  dabbrev-menu-complete
-
-
 
 alias xulfx="TERM=xterm-color /Applications/Firefox.app/Contents/MacOS/firefox -P xuldev -jsconsole"
 alias gvim="TERM=xterm-color /Applications/MacPorts/Vim/Vim.app/Contents/MacOS/Vim -g"
@@ -271,5 +177,5 @@ if which direnv > /dev/null; then
   eval "$(direnv hook zsh)"
 fi
 
-. ~/.zshenv
+source ~/.zshenv
 # vim: set sw=2 sts=2 ts=2:
