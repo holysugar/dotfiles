@@ -6,7 +6,11 @@ githubuser=holysugar
 
 # install homebrew
 # https://brew.sh/index_ja.html
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+if which brew >/dev/null 2>/dev/null; then
+  brew update
+else
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
 
 # install brew-file
 # https://homebrew-file.readthedocs.io/en/latest/installation.html
@@ -51,3 +55,12 @@ brew file install
 if ! dscl . -read /Users/holy UserShell | grep zsh > /dev/null; then
   sudo dscl . -create /Users/$USER UserShell /bin/zsh
 fi
+
+# vim + Vundle
+if [ ! -e ~/.vim/bundle/Vundle.vim ]; then
+  mkdir -p ~/.vim/{backup,bundle,ftplugin}
+  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  vim +PluginInstall +qall
+fi
+
+

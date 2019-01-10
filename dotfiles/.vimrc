@@ -136,85 +136,9 @@ endif
 " " }}}
 
 
-" Plugins " {{{
-filetype off
-
-set runtimepath+=~/.vim/bundle/neobundle.vim/
-call neobundle#begin(expand('~/.vim/bundle/'))
-
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" Vim
-NeoBundle "YankRing.vim"
-NeoBundle "https://github.com/thinca/vim-poslist.git"
-
-" Programming
-NeoBundle "rails.vim"
-NeoBundle "https://github.com/thinca/vim-quickrun.git"
-NeoBundle "https://github.com/gmarik/snipmate.vim.git"
-NeoBundle "https://github.com/rstacruz/sparkup.git", {'rtp': 'vim/'}
-NeoBundle "https://github.com/kchmck/vim-coffee-script"
-NeoBundle "stickykey"
-NeoBundle "haml.zip"
-NeoBundle "slim-template/vim-slim.git"
-NeoBundle "derekwyatt/vim-scala"
-
-NeoBundle 'chrisbra/csv.vim'
-
-" Syntax highlight
-NeoBundle "jQuery"
-NeoBundle "cucumber.zip"
-NeoBundle "Markdown"
-NeoBundle "https://github.com/timcharper/textile.vim.git"
-
-" Git integration
-NeoBundle "https://github.com/tpope/vim-git"
-NeoBundle "fugitive.vim"
-NeoBundle "https://github.com/mattn/gist-vim.git"
-
-" (HT|X)ml tool
-NeoBundle "ragtag.vim"
-NeoBundle "matchit.zip"
-
-" Utility
-NeoBundle "repeat.vim"
-NeoBundle "surround.vim"
-"NeoBundle "SuperTab"
-NeoBundle "file-line"
-NeoBundle "Align"
-
-" FuzzyFinder
-NeoBundle "L9"
-NeoBundle "FuzzyFinder"
-let g:fuf_modesDisable = []
-
-" Zoomwin
-NeoBundle "ZoomWin"
-
-" Ack
-NeoBundle "ack.vim"
-
-" tComment
-NeoBundle "tComment"
-
-"" Command-T
-"" NeoBundle "git://git.wincent.com/command-t.git"
-" let g:CommandTMatchWindowAtTop=1 " show window at top
-
-" Navigation
-NeoBundle "https://github.com/gmarik/vim-visual-star-search.git"
-
-" neocomplcache
-"NeoBundle "neocomplcache"
-"let g:neocomplcache_enable_at_startup = 1
-
-NeoBundle 'yaasita/slack.vim'
-
-call neobundle#end()
-
-filetype plugin indent on
-" " }}}
-
+if filereadable(expand('~/.vimrc.plugin'))
+  source ~/.vimrc.plugin
+endif
 
 " Key mappings " {{{
 let maplocalleader = ','

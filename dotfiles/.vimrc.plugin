@@ -1,0 +1,77 @@
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'YankRing.vim'
+
+Plugin 'https://github.com/thinca/vim-poslist.git'
+
+" Programming
+Plugin 'rails.vim'
+Plugin 'https://github.com/thinca/vim-quickrun.git'
+Plugin 'https://github.com/gmarik/snipmate.vim.git'
+Plugin 'https://github.com/rstacruz/sparkup.git', {'rtp': 'vim/'}
+Plugin 'https://github.com/kchmck/vim-coffee-script'
+Plugin 'stickykey'
+Plugin 'haml.zip'
+Plugin 'slim-template/vim-slim.git'
+Plugin 'derekwyatt/vim-scala'
+
+Plugin 'chrisbra/csv.vim'
+
+" Syntax highlight
+Plugin 'jQuery'
+Plugin 'cucumber.zip'
+Plugin 'Markdown'
+Plugin 'https://github.com/timcharper/textile.vim.git'
+
+" Git integration
+Plugin 'https://github.com/tpope/vim-git'
+Plugin 'fugitive.vim'
+Plugin 'https://github.com/mattn/gist-vim.git'
+
+" (HT|X)ml tool
+Plugin 'ragtag.vim'
+Plugin 'matchit.zip'
+
+" Utility
+Plugin 'repeat.vim'
+Plugin 'surround.vim'
+"Plugin 'SuperTab'
+Plugin 'file-line'
+Plugin 'Align'
+
+" FuzzyFinder
+Plugin 'L9'
+Plugin 'FuzzyFinder'
+let g:fuf_modesDisable = []
+
+" Zoomwin
+Plugin 'ZoomWin'
+
+" Ack
+Plugin 'ack.vim'
+
+" tComment
+Plugin 'tComment'
+
+" Command-T
+" Plugin 'git://git.wincent.com/command-t.git'
+" let g:CommandTMatchWindowAtTop=1 ' show window at top
+
+" Navigation
+Plugin 'https://github.com/gmarik/vim-visual-star-search.git'
+
+" neocomplcache
+"Plugin 'neocomplcache'
+"let g:neocomplcache_enable_at_startup = 1
+
+Plugin 'yaasita/slack.vim'
+
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+

@@ -11,13 +11,13 @@ for i in ${dotfiles}; do
   if [ "${i: -1}" = "." ]; then
     continue
   fi
-  ln -s $origdir/$i
+  ln -s $origdir/$i 2>/dev/null
 done
 
 # .config/brewfile
 mkdir -p ~/.config/brewfile 2>/dev/null
 (
   cd ~/.config/brewfile
-  ln -s $origdir/dotconfig/brewfile/Brewfile
+  ln -s $origdir/dotconfig/brewfile/Brewfile 2>/dev/null
 )
 
