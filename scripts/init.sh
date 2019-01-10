@@ -18,9 +18,12 @@ for i in \
   ln -s $origdir/$i ~/
 done
 
-# .config
+# .config/brewfile
 mkdir -p ~/.config/brewfile 2>/dev/null
-ln -s $origdir/.config/brewfile/Brefile
+(
+  cd ~/.config/brewfile
+  ln -s $origdir/dotconfig/brewfile/Brewfile .
+)
 
 # chsh
 sudo dscl . -create /Users/$USER UserShell /bin/zsh
