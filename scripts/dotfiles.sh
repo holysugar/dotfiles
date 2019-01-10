@@ -1,7 +1,7 @@
 #!/bin/sh
 
 origdir=$( cd $(dirname $0)/.. ; pwd )
-dotfiles=$( echo dotfiles/{*,.*} )
+dotfiles=$( cd $origdir; echo dotfiles/{*,.*} )
 
 cd ~
 

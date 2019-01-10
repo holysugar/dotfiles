@@ -19,7 +19,6 @@ brew kubernetes-cli
 brew kubernetes-helm
 brew kustomize
 brew lv
-brew macvim-kaoriya
 brew mas
 brew mitmproxy
 brew mpv
@@ -32,6 +31,7 @@ brew rbenv
 brew ruby-build
 brew rtmpdump
 brew stern
+brew terraform
 brew w3m
 brew wget
 brew x265
@@ -58,16 +58,16 @@ cask hyperswitch
 cask iterm2
 cask jupyter-notebook-ql
 cask kindle
-cask macvim
 cask onyx
-cask qlimagesize
-cask qlprettypatch
 cask quicklook-csv
 cask simplefloatingclock
 cask virtualbox
 cask vlc
 cask xld
 cask wireshark
+
+tap delphinus/macvim-kaoriya
+cask macvim-kaoriya-override
 
 # App Store applications
 appstore 406056744 Evernote (7.5.2)
