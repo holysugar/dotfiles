@@ -27,6 +27,8 @@ Plugin 'jQuery'
 Plugin 'cucumber.zip'
 Plugin 'Markdown'
 Plugin 'https://github.com/timcharper/textile.vim.git'
+Plugin 'vim-terraform'
+Plugin 'othree/yajs'
 
 " Git integration
 Plugin 'https://github.com/tpope/vim-git'

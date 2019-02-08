@@ -1,5 +1,9 @@
 PATH=$HOME/bin:$HOME/opt/android-sdk-macosx/platform-tools:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
+if [ -f /usr/local/share/kube-ps1.sh ]; then
+  source /usr/local/share/kube-ps1.sh
+fi
+
 if [ -x /usr/local/bin/rbenv ]; then
   eval "$(/usr/local/bin/rbenv init - )"
 fi
@@ -22,3 +26,5 @@ if [ -f $HOME/.environments.local ]; then
 fi
 
 export PATH
+
+export GOPATH=$HOME

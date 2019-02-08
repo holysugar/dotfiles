@@ -58,7 +58,7 @@ fi
 
 # vim + Vundle
 if [ ! -e ~/.vim/bundle/Vundle.vim ]; then
-  mkdir -p ~/.vim/{backup,bundle,ftplugin}
+  mkdir -p ~/.vim/{backup,undo,bundle,ftplugin}
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   vim +PluginInstall +qall
 fi

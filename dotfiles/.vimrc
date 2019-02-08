@@ -16,6 +16,7 @@ set writebackup
 set backup
 set directory=/tmp/ " prepend(^=) $HOME/.tmp/ to default path; use full path as backup filename(//)
 set backupdir=~/.vim/backup
+set undodir=~/.vim/undo
 " Buffers
 set hidden " The current buffer can be put to the background without writing to disk
 " Match and search

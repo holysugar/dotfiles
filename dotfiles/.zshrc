@@ -47,13 +47,20 @@ ZSHFG=`expr $RANDOM % 250` # initial
 
 setprompt() {
   prompt_vcs='%1(v|%F{green}%1v%f|)'
+  prompt_k8s=$(kube_ps1 2>/dev/null)
   gcpproject=`gcloud config get-value project 2> /dev/null`
   #export FACE='✘╹◡╹✘ '
   ZSHFG=`expr \( $ZSHFG + 1 \) % 250`
   SUSHI=$'\U1F363 '
   INVADOR=$'\U1F47E '
-  PROMPT="%F{yellow}[%n@%m %2d]%f %F{$ZSHFG}${FACE}%f%(?.${SUSHI}.${INVADOR})< "
-  RPROMPT="$prompt_vcs %F{cyan}<$gcpproject>%f"
+  EMOJI="%(?.${SUSHI}.${INVADOR})"
+  PROMPT1="%F{cyan}[%~]%f $prompt_vcs %F{cyan}<$gcpproject>%f $(kube_ps1) "
+  PROMPT2="%F{yellow}[%n@%m]%f$ "
+  PROMPT="
+${PROMPT1}
+${PROMPT2}"
+  #PROMPT="%F{yellow}[%n@%m %2d]%f %F{$ZSHFG}${FACE}%f%(?.${SUSHI}.${INVADOR})< "
+  #RPROMPT="$prmopt_vcs $(kube_ps1) %F{cyan}<$gcpproject>%f"
 }
 
 setprompt
@@ -159,10 +166,15 @@ alias fs="foreman start"
 alias s="screen -U"
 alias sx="screen -U -x"
 
-alias v=vagrant
+alias t="terraform"
+alias tp="terraform plan"
+alias ta="terraform apply"
+
 alias d=docker
 alias dl='docker ps -l -q'
 dshell() { docker run --entrypoint /bin/bash -t -i $1 -l }
+
+alias k='kubectl'
 
 alias w-rails="watchr ~/rails.watchr"
 ffrmig() {
