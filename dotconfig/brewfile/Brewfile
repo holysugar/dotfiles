@@ -11,31 +11,39 @@ brew ack
 brew direnv
 brew ffmpeg
 brew ghq
+brew graphviz
 brew go
 brew hub
 brew imagemagick
 brew jq
 brew kube-ps1
 brew kubectx
+brew shyiko/kubesec/kubesec
 brew kubernetes-cli
 brew kubernetes-helm
 brew kustomize
+brew libsodium
 brew lv
 brew mas
 brew mitmproxy
+brew mono
 brew mpv
-brew mysql-client
+brew mysql@5.7
+brew nmap
 brew openssh
 brew openssl
+brew p7zip
 brew peco
 brew pwgen
-brew readline
 brew rbenv
+brew readline
+brew redis
 brew ruby-build
 brew rtmpdump
 brew shellcheck
 brew stern
 brew terraform
+brew terraformer
 brew w3m
 brew wget
 brew x265
@@ -52,6 +60,7 @@ cask appcleaner
 cask caffeine
 cask controlplane
 cask docker
+cask dotnet-sdk
 cask dropbox
 cask firefox
 cask geektool
@@ -66,21 +75,13 @@ cask kindle
 cask onyx
 cask quicklook-csv
 cask simplefloatingclock
+cask skitch
+cask unity-hub
+cask visual-studio-code
 cask virtualbox
 cask vlc
-cask xld
 cask wireshark
+cask xld
 
 tap delphinus/macvim-kaoriya
 cask macvim-kaoriya-override
-
-# App Store applications
-appstore 406056744 Evernote (7.5.2)
-appstore 408981434 iMovie (10.1.9)
-appstore 409183694 Keynote (8.2)
-appstore 409201541 Pages (7.2)
-appstore 409203825 Numbers (5.2)
-appstore 497799835 Xcode (10.0)
-appstore 539883307 LINE (5.10.1)
-appstore 682658836 GarageBand (10.2.0)
-appstore 803453959 Slack (3.3.2)

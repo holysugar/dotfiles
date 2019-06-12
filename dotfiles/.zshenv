@@ -1,4 +1,12 @@
-PATH=$HOME/bin:$HOME/opt/android-sdk-macosx/platform-tools:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+# avoid /etc/zprofile in login shell
+setopt no_global_rcs
+
+# system-wide environment settings for zsh(1)
+if [ -x /usr/libexec/path_helper ]; then
+   eval `/usr/libexec/path_helper -s`
+fi
+
+PATH=$HOME/bin:$PATH
 
 if [ -f /usr/local/share/kube-ps1.sh ]; then
   source /usr/local/share/kube-ps1.sh
@@ -24,6 +32,8 @@ fi
 if [ -f $HOME/.environments.local ]; then
   source $HOME/.environments.local
 fi
+
+PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
 
 export PATH
 

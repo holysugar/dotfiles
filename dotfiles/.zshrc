@@ -40,7 +40,6 @@ setopt prompt_subst
 # ZLE
 unsetopt beep
 
-
 ############ env for zsh
 
 ZSHFG=`expr $RANDOM % 250` # initial
@@ -189,5 +188,5 @@ if which direnv > /dev/null; then
   eval "$(direnv hook zsh)"
 fi
 
-source ~/.zshenv
+#source ~/.zshenv
 # vim: set sw=2 sts=2 ts=2:

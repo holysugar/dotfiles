@@ -48,6 +48,9 @@ set smarttab " Smarter tab levels
 set autoindent
 
 syntax on               " enable syntax
+
+autocmd BufNewFile,BufRead *.go setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+autocmd BufNewFile,BufRead *.cs setlocal tabstop=4 softtabstop=4 shiftwidth=4
 " "}}}
 
 " Visual "{{{
@@ -80,8 +83,8 @@ set title
 
 set wildmenu
 
-set cursorcolumn
-set cursorline
+set nocursorcolumn
+set nocursorline
 
 "colorscheme gmarik
 colorscheme desert

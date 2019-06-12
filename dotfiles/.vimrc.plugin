@@ -19,6 +19,7 @@ Plugin 'stickykey'
 Plugin 'haml.zip'
 Plugin 'slim-template/vim-slim.git'
 Plugin 'derekwyatt/vim-scala'
+Plugin 'https://github.com/fatih/vim-go'
 
 Plugin 'chrisbra/csv.vim'
 
