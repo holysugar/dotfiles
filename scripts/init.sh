@@ -49,6 +49,7 @@ if mas version | grep 1.3; then
   brew install mas
 fi
 
+brew file set_repo holysugar/Brewfile
 brew file install
 
 # chsh
